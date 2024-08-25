@@ -1,0 +1,38 @@
+# Ignore the Maven target directory (compiled code and artifacts)
+target/
+
+# Ignore the Maven wrapper cache
+.mvn/
+.mvnw
+
+# Ignore Git files and directories
+.git/
+.gitignore
+
+# Ignore IDE directories and files
+*.iml
+.idea/
+.vscode/
+*.swp
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+*.bak
+*.out
+
+# Ignore test directories
+src/test/
+
+# Ignore other build-related files
+node_modules/
+dist/
+build/
+
+# Ignore the Dockerfile and .dockerignore themselves (optional)
+Dockerfile
+.dockerignore
