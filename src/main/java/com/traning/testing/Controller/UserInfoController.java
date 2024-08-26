@@ -4,6 +4,7 @@ import com.traning.testing.DTO.UserDTO;
 import com.traning.testing.Entity.UserInfo;
 import com.traning.testing.Service.ServiceImpl.UserInfoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
@@ -14,6 +15,15 @@ import java.util.List;
 public class UserInfoController {
     @Autowired
     private UserInfoImpl userInfoImpl;
+
+    @GetMapping("/welcome")
+//    @PreAuthorize("hasAuthority('ROLE_USER')")
+    public String welcome(Model model){
+        model.addAttribute("message","Welcome this endpoint is freeeee....");
+        return "welcome";
+    }
+
+
 
     @GetMapping("/get-users")
     public List<UserInfo> getAllUsers(){
