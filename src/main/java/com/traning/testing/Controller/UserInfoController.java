@@ -19,8 +19,8 @@ public class UserInfoController {
     @GetMapping("/welcome")
 //    @PreAuthorize("hasAuthority('ROLE_USER')")
     public String welcome(Model model){
-        model.addAttribute("message","Welcome this endpoint is freeeee....");
-        return "welcome";
+        model.addAttribute("message","Welcome this endpoint is freeeee.... and checkinh ");
+        return "welcome checking jenkins aotumatic build 1";
     }
 
 
