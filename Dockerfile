@@ -20,6 +20,9 @@ FROM eclipse-temurin:21-jdk-alpine
 
 WORKDIR /app
 
-COPY --from=builder /app/target/TestAwsCiCd.jar /app/TestAwsCiCd.jar
+ARG JAR_FILE=target/TestAwsCiCd.jar
+ADD ${JAR_FILE} app.jar
 
-ENTRYPOINT ["java", "-jar", "TestAwsCiCd.jar"]
+#COPY --from=builder /app/target/TestAwsCiCd.jar /app/TestAwsCiCd.jar
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
