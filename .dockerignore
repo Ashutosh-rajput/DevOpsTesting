@@ -1,5 +1,5 @@
 # Ignore the Maven target directory (compiled code and artifacts)
-target/
+#target/
 
 # Ignore the Maven wrapper cache
 .mvn/
