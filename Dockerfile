@@ -20,6 +20,8 @@ FROM eclipse-temurin:21-jdk-alpine
 
 WORKDIR /app
 
+EXPOSE 8090
+
 ARG JAR_FILE=target/TestAwsCiCd.jar
 ADD ${JAR_FILE} TestAwsCiCd.jar
 
