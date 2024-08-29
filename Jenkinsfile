@@ -1,15 +1,15 @@
 pipeline {
     agent any
-    tools {
-        maven 'Maven3.9.9'
-    }
+//     tools {
+//         maven 'Maven3.9.9'
+//     }
     stages {
-        stage("build maven") {
-            steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Ashutosh-rajput/DevOpsTesting']])
-                sh 'mvn clean install'
-            }
-        }
+//         stage("build maven") {
+//             steps {
+//                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Ashutosh-rajput/DevOpsTesting']])
+//                 sh 'mvn clean install'
+//             }
+//         }
         stage("Build docker image") {
             steps {
                 script {
