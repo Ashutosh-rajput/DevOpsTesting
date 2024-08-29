@@ -3,35 +3,59 @@ FROM eclipse-temurin:21-jdk-alpine as builder
 
 WORKDIR /app
 
-# Copy the necessary files
-COPY mvnw ./
-COPY .mvn .mvn
+# Install Maven
+RUN apk add --no-cache maven
+
 COPY pom.xml ./
+RUN mvn dependency:go-offline -B
 
-# Ensure the mvnw script is executable
-RUN chmod +x ./mvnw
-
-# Download dependencies
-RUN ./mvnw dependency:go-offline -B
-
-# Copy the source code
 COPY src ./src
 
-# Build the application
-RUN ./mvnw clean package -DskipTests
+RUN mvn clean package -DskipTests
 
 # Stage 2: Create the final image
 FROM eclipse-temurin:21-jre-alpine
 
 WORKDIR /app
 
-EXPOSE 8090
+COPY --from=builder /app/target/TestAwsCiCd.jar app.jar
 
-# Copy the built jar from the builder stage
-COPY --from=builder /app/target/TestAwsCiCd.jar /app/TestAwsCiCd.jar
+ENTRYPOINT ["java", "-jar", "app.jar"]
 
-# Run the application
-ENTRYPOINT ["java", "-jar", "TestAwsCiCd.jar"]
+## Stage 1: Build the application
+#FROM eclipse-temurin:21-jdk-alpine as builder
+#
+#WORKDIR /app
+#
+## Copy the necessary files
+#COPY mvnw ./
+#COPY .mvn .mvn
+#COPY pom.xml ./
+#
+## Ensure the mvnw script is executable
+#RUN chmod +x ./mvnw
+#
+## Download dependencies
+#RUN ./mvnw dependency:go-offline -B
+#
+## Copy the source code
+#COPY src ./src
+#
+## Build the application
+#RUN ./mvnw clean package -DskipTests
+#
+## Stage 2: Create the final image
+#FROM eclipse-temurin:21-jre-alpine
+#
+#WORKDIR /app
+#
+#EXPOSE 8090
+#
+## Copy the built jar from the builder stage
+#COPY --from=builder /app/target/TestAwsCiCd.jar /app/TestAwsCiCd.jar
+#
+## Run the application
+#ENTRYPOINT ["java", "-jar", "TestAwsCiCd.jar"]
 
 ## Stage 1: Build the application
 #FROM eclipse-temurin:21-jdk-alpine as builder
