@@ -12,7 +12,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Stage 2: Create the final image with a minimal runtime environment
-FROM gcr.io/distroless/java21-debian11
+FROM eclipse-temurin:21-jre-alpine
 
 WORKDIR /app
 
@@ -21,6 +21,7 @@ COPY --from=builder /app/target/TestAwsCiCd.jar /app.jar
 
 # Use optimized JVM options to reduce memory usage
 ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-jar", "/app.jar"]
+
 
 
 
