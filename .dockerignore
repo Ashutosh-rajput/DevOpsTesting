@@ -2,8 +2,8 @@
 #target/
 
 # Ignore the Maven wrapper cache
-.mvn/
-.mvnw
+#.mvn/
+#.mvnw
 
 # Ignore Git files and directories
 .git/
