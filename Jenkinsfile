@@ -50,6 +50,24 @@ pipeline {
                 }
             }
         }
+        stage("Cleanup previous containers") {
+                    steps {
+                        script {
+                            def containerId = sh(
+                                script: "docker ps -q --filter ancestor=ashutoshrajput81/testawscicd",
+                                returnStdout: true
+                            ).trim()
+
+                            if (containerId) {
+                                echo "Stopping and removing container: ${containerId}"
+                                sh "docker stop ${containerId}"
+                                sh "docker rm ${containerId}"
+                            } else {
+                                echo "No running container found."
+                            }
+                        }
+                    }
+                }
         stage("Docker Deploy"){
             steps{
                 sh 'docker run -itd -p 8090:8090 ashutoshrajput81/testawscicd'}}
