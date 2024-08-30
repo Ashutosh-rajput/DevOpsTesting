@@ -20,7 +20,7 @@ public class UserInfoController {
 //    @PreAuthorize("hasAuthority('ROLE_USER')")
     public String welcome(Model model){
         model.addAttribute("message","Welcome this endpoint is freeeee.... and checkinh ");
-        return "welcome checking jenkins aotumatic build 1";
+        return "welcome checking Making some changes";
     }
 
 
