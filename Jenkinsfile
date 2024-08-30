@@ -1,8 +1,8 @@
 pipeline {
     agent any
-//     tools {
-//         maven 'Maven3.9.9'
-//     }
+    tools {
+            maven 'Maven3.9.9' // Ensure 'Maven3.9.9' is configured in Jenkins global tool configuration
+        }
     stages {
         stage("Compile and Clean") {
             steps {
@@ -40,16 +40,16 @@ pipeline {
                 }
             }
         }
-//         stage("Push Docker Image to Docker hub") {
-//             steps {
-//                 script {
-//                     withCredentials([string(credentialsId: 'Dockerhubpwdid', variable: 'Dockerhubpwd')]) {
-//                         sh 'docker login -u ashutoshrajput81 -p ${Dockerhubpwd}'
-//                     }
-//                     sh 'docker push ashutoshrajput81/testawscicd'
-//                 }
-//             }
-//         }
+        stage("Push Docker Image to Docker hub") {
+            steps {
+                script {
+                    withCredentials([string(credentialsId: 'Dockerhubpwdid', variable: 'Dockerhubpwd')]) {
+                        sh 'docker login -u ashutoshrajput81 -p ${Dockerhubpwd}'
+                    }
+                    sh 'docker push ashutoshrajput81/testawscicd'
+                }
+            }
+        }
         stage("Docker Deploy"){
             steps{
                 sh 'docker run -itd -p 8090:8090 ashutoshrajput81/testawscicd'}}
