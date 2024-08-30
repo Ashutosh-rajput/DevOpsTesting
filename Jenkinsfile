@@ -50,20 +50,21 @@ pipeline {
                 }
             }
         }
-        stage("Cleanup previous containers") {
+        stage("Cleanup existing containers on port 8090") {
                     steps {
                         script {
+                            // Get the container ID that is using port 8090
                             def containerId = sh(
-                                script: "docker ps -q --filter ancestor=ashutoshrajput81/testawscicd",
+                                script: "docker ps -q --filter 'publish=8090'",
                                 returnStdout: true
                             ).trim()
 
                             if (containerId) {
-                                echo "Stopping and removing container: ${containerId}"
+                                echo "Stopping and removing container using port 8090: ${containerId}"
                                 sh "docker stop ${containerId}"
                                 sh "docker rm ${containerId}"
                             } else {
-                                echo "No running container found."
+                                echo "No running container found on port 8090."
                             }
                         }
                     }
