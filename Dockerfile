@@ -18,11 +18,12 @@ WORKDIR /app
 
 EXPOSE 8080
 
-ARG JAR_FILE=target/TestAwsCiCd.jar
-ADD ${JAR_FILE} app.jar
+#ARG JAR_FILE=target/TestAwsCiCd.jar
+#ADD ${JAR_FILE} app.jar
+#COPY target/TestAwsCiCd.jar app.jar
 
 # Copy the packaged jar from the builder stage
-#COPY --from=builder /app/target/TestAwsCiCd.jar /app.jar
+COPY target/TestAwsCiCd.jar app.jar
 
 # Use optimized JVM options to reduce memory usage
 ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-jar", "/app.jar"]
