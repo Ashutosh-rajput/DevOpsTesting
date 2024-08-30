@@ -23,7 +23,8 @@ EXPOSE 8080
 #COPY target/TestAwsCiCd.jar app.jar
 
 # Copy the packaged jar from the builder stage
-COPY target/TestAwsCiCd.jar app.jar
+COPY C:/Users/ASHUTOSH/.jenkins/workspace/AwsCiCdTesting/target/TestAwsCiCd.jar app.jar
+RUN ls -l /app/
 
 # Use optimized JVM options to reduce memory usage
 ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-jar", "/app.jar"]
