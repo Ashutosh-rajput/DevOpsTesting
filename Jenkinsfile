@@ -4,12 +4,17 @@ pipeline {
 //         maven 'Maven3.9.9'
 //     }
     stages {
-//         stage("build maven") {
-//             steps {
+        stage("Compile and Clean") {
+            steps {
 //                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Ashutosh-rajput/DevOpsTesting']])
-//                 sh 'mvn clean install'
-//             }
-//         }
+                sh 'mvn clean compile'
+            }
+        }
+        stage("Deploy"){
+            steps{
+                sh 'mvn package'
+            }
+        }
         stage("Build docker image") {
             steps {
                 script {
@@ -45,5 +50,8 @@ pipeline {
                 }
             }
         }
+        stage("Docker Deploy"){
+            steps{
+                sh 'docker run -itd -p 8090:8090 ashutoshrajput81/testawscicd'}}
     }
 }
