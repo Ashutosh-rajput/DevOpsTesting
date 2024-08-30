@@ -20,7 +20,7 @@ public class UserInfoController {
 //    @PreAuthorize("hasAuthority('ROLE_USER')")
     public String welcome(Model model){
         model.addAttribute("message","Welcome this endpoint is freeeee.... and checkinh ");
-        return "welcome checking some more changes added webhooks 2";
+        return "welcome checking some more changes added webhooks 3";
     }
 
 
